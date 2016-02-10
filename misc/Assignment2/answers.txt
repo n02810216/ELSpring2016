@@ -1,0 +1,376 @@
+
+pi@raspberrypi ~/ELspring2016 $ ifconfig
+eth0      Link encap:Ethernet  HWaddr b8:27:eb:7a:f0:a7  
+          inet6 addr: fe80::e51d:d249:1e77:922/64 Scope:Link
+          UP BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:128066 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:128066 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:345076709 (329.0 MiB)  TX bytes:345076709 (329.0 MiB)
+
+wlan0     Link encap:Ethernet  HWaddr 00:0f:60:08:67:22  
+          inet addr:192.168.0.15  Bcast:192.168.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::2a9d:f883:9c82:e94a/64 Scope:Link
+          inet6 addr: 2604:2000:2b83:5b00:fb4e:1267:1c34:98cc/64 Scope:Global
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:15087 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:22202 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:3939185 (3.7 MiB)  TX bytes:24948035 (23.7 MiB)
+
+pi@raspberrypi ~ $ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       5.5G  3.2G  2.0G  62% /
+devtmpfs        459M     0  459M   0% /dev
+tmpfs           463M     0  463M   0% /dev/shm
+tmpfs           463M  6.4M  457M   2% /run
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+tmpfs           463M     0  463M   0% /sys/fs/cgroup
+/dev/mmcblk0p6   60M   20M   41M  33% /boot
+tmpfs            93M  8.0K   93M   1% /run/user/1000
+/dev/mmcblk0p5  488M  408K  452M   1% /media/pi/data
+/dev/mmcblk0p3   27M  397K   25M   2% /media/pi/SETTINGS
+
+
+pi@raspberrypi:~$ du -sk ~/
+74444	/home/pi/
+pi@raspberrypi:~$ du -sh ~/
+
+pi@raspberrypi:~$ ps xa
+73M	/home/pi/
+
+pi@raspberrypi:~$ ps xa
+  PID TTY      STAT   TIME COMMAND
+    1 ?        Ss     0:06 /sbin/init
+    2 ?        S      0:00 [kthreadd]
+    3 ?        S      0:00 [ksoftirqd/0]
+    5 ?        S<     0:00 [kworker/0:0H]
+    7 ?        S      0:02 [rcu_preempt]
+    8 ?        S      0:00 [rcu_sched]
+    9 ?        S      0:00 [rcu_bh]
+   10 ?        S      0:00 [migration/0]
+   11 ?        S      0:00 [migration/1]
+   12 ?        S      0:00 [ksoftirqd/1]
+   14 ?        S<     0:00 [kworker/1:0H]
+   15 ?        S      0:00 [migration/2]
+   16 ?        S      0:00 [ksoftirqd/2]
+   18 ?        S<     0:00 [kworker/2:0H]
+   19 ?        S      0:00 [migration/3]
+   20 ?        S      0:00 [ksoftirqd/3]
+   22 ?        S<     0:00 [kworker/3:0H]
+   23 ?        S<     0:00 [khelper]
+   24 ?        S      0:00 [kdevtmpfs]
+   25 ?        S<     0:00 [netns]
+   26 ?        S<     0:00 [perf]
+   27 ?        S      0:00 [khungtaskd]
+   28 ?        S<     0:00 [writeback]
+   29 ?        S<     0:00 [crypto]
+   30 ?        S<     0:00 [bioset]
+   31 ?        S<     0:00 [kblockd]
+   32 ?        S      0:00 [kworker/1:1]
+   33 ?        S<     0:00 [rpciod]
+   34 ?        S      0:00 [kswapd0]
+   35 ?        S      0:00 [fsnotify_mark]
+   36 ?        S<     0:00 [nfsiod]
+   42 ?        S<     0:00 [kthrotld]
+   44 ?        S<     0:00 [VCHIQ-0]
+   45 ?        S<     0:00 [VCHIQr-0]
+   46 ?        S<     0:00 [VCHIQs-0]
+   47 ?        S<     0:00 [iscsi_eh]
+   48 ?        S<     0:00 [dwc_otg]
+   49 ?        S<     0:00 [DWC Notificatio]
+   50 ?        S      0:04 [kworker/u8:1]
+   51 ?        S      0:00 [VCHIQka-0]
+   52 ?        S<     0:00 [SMIO]
+   53 ?        S<     0:00 [deferwq]
+   55 ?        S      0:01 [mmcqd/0]
+   57 ?        S      0:00 [kworker/1:2]
+   58 ?        S      0:00 [jbd2/mmcblk0p7-]
+   59 ?        S<     0:00 [ext4-rsv-conver]
+   60 ?        S<     0:00 [ipv6_addrconf]
+  106 ?        Ss     0:01 /lib/systemd/systemd-journald
+  108 ?        Ss     0:00 /lib/systemd/systemd-udevd
+  119 ?        S      0:00 [kworker/2:2]
+  218 ?        S<     0:00 [cfg80211]
+  416 ?        S      0:00 [kworker/0:2]
+  433 ?        Ss     0:01 /sbin/wpa_supplicant -s -B -P /run/wpa_supplicant.wlan0.pid -i wlan0 -D nl8
+  505 ?        Ss     0:00 /usr/sbin/sshd -D
+  507 ?        Ss     0:00 /usr/sbin/cron -f
+  509 ?        Ss     0:00 /lib/systemd/systemd-logind
+  526 ?        Ss     0:00 avahi-daemon: running [raspberrypi.local]
+  528 ?        Ss     0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --sys
+  556 ?        Ss     0:00 /usr/sbin/thd --daemon --triggers /etc/triggerhappy/triggers.d/ --socket /v
+  573 ?        Ss     0:00 /usr/sbin/ntpd -p /var/run/ntpd.pid -g -u 107:112
+  582 ?        S      0:00 avahi-daemon: chroot helper
+  603 ?        Sl     0:24 /usr/sbin/xrdp
+  622 ?        S      0:00 /usr/sbin/xrdp-sesman
+  665 ?        S      0:22 /usr/bin/tor --defaults-torrc /usr/share/tor/tor-service-defaults-torrc --h
+  666 ?        Ssl    0:00 /usr/sbin/rsyslogd -n
+  698 ?        Ss     0:00 /sbin/dhcpcd
+  723 ?        Ssl    0:00 /usr/sbin/lightdm
+  724 tty1     Ss     0:00 /bin/login -f   
+  725 ?        Ss+    0:00 /sbin/agetty --keep-baud 115200 38400 9600 ttyAMA0 vt102
+  730 tty7     Ss+    0:09 /usr/bin/X :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7 
+  737 ?        S      0:06 [kworker/u8:3]
+  741 ?        Ss     0:00 /lib/systemd/systemd --user
+  747 ?        S      0:00 (sd-pam)  
+  756 tty1     S+     0:00 -bash
+  768 ?        Sl     0:00 lightdm --session-child 13 16
+  783 ?        Ssl    0:01 /usr/bin/lxsession -s LXDE-pi -e LXDE
+  889 ?        Ss     0:00 /usr/bin/ssh-agent /usr/bin/dbus-launch --exit-with-session x-session-manag
+  892 ?        S      0:00 /usr/bin/dbus-launch --exit-with-session x-session-manager
+  893 ?        Ss     0:00 /usr/bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+  894 ?        S<     0:00 [kworker/3:1H]
+  900 ?        Sl     0:00 /usr/lib/gvfs/gvfsd
+  904 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-fuse /run/user/1000/gvfs -f -o big_writes
+  905 ?        S<     0:00 [kworker/0:1H]
+  915 ?        S      0:01 openbox --config-file /home/pi/.config/openbox/lxde-pi-rc.xml
+  916 ?        Sl     0:00 lxpolkit
+  919 ?        Sl     0:25 lxpanel --profile LXDE-pi
+  921 ?        Sl     0:00 pcmanfm --desktop --profile LXDE-pi
+  928 ?        Ss     0:00 /usr/bin/ssh-agent -s
+  929 ?        Ssl    0:00 /usr/lib/policykit-1/polkitd --no-debug
+  984 ?        Sl     0:00 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+  986 ?        Ssl    0:00 /usr/lib/udisks2/udisksd --no-debug
+  996 ?        Sl     0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+ 1000 ?        Sl     0:00 /usr/lib/gvfs/gvfs-goa-volume-monitor
+ 1004 ?        Sl     0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+ 1009 ?        Sl     0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+ 1017 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-trash --spawner :1.1 /org/gtk/gvfs/exec_spaw/0
+ 1019 ?        Ssl    0:00 /usr/lib/menu-cache/menu-cached /tmp/.menu-cached-:0-pi
+ 1032 ?        S      0:00 [jbd2/mmcblk0p5-]
+ 1033 ?        S<     0:00 [ext4-rsv-conver]
+ 1074 ?        S      0:00 [jbd2/mmcblk0p3-]
+ 1075 ?        S<     0:00 [ext4-rsv-conver]
+ 1079 ?        S<     0:00 [kworker/2:1H]
+ 1083 ?        S<     0:00 [kworker/1:1H]
+ 1252 ?        Sl     0:28 epiphany-browser
+ 1257 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-http --spawner :1.1 /org/gtk/gvfs/exec_spaw/1
+ 1306 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-metadata
+ 2328 ?        Sl     0:01 lxterminal
+ 2332 ?        S      0:00 gnome-pty-helper
+ 2333 pts/0    Ss+    0:00 /bin/bash
+ 2369 ?        S      0:05 [kworker/u8:2]
+ 2372 ?        S      0:00 [kworker/2:0]
+ 2732 ?        S      0:00 [kworker/3:0]
+ 5792 ?        S      0:00 /usr/sbin/xrdp-sessvc 5798 5797
+ 5797 ?        Sl     0:00 /usr/bin/lxsession -s LXDE-pi -e LXDE
+ 5798 ?        S      0:04 Xvnc :10 -geometry 3840x2160 -depth 24 -rfbauth /home/pi/.vnc/sesman_pi_pas
+ 5806 ?        Sl     0:00 xrdp-chansrv
+ 5824 ?        Ss     0:00 /usr/bin/ssh-agent /usr/bin/dbus-launch --exit-with-session x-session-manag
+ 5827 ?        S      0:00 /usr/bin/dbus-launch --exit-with-session x-session-manager
+ 5828 ?        Ss     0:00 /usr/bin/dbus-daemon --fork --print-pid 10 --print-address 12 --session
+ 5834 ?        Sl     0:00 /usr/lib/gvfs/gvfsd
+ 6038 ?        S      0:00 openbox --config-file /home/pi/.config/openbox/lxde-pi-rc.xml
+ 6045 ?        Sl     0:00 lxpolkit
+ 6047 ?        Sl     0:10 lxpanel --profile LXDE-pi
+ 6052 ?        Sl     0:00 pcmanfm --desktop --profile LXDE-pi
+ 6078 ?        Ss     0:00 /usr/bin/ssh-agent -s
+ 6124 ?        Sl     0:00 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+ 6187 ?        Sl     0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+ 6212 ?        Sl     0:00 /usr/lib/gvfs/gvfs-goa-volume-monitor
+ 6237 ?        Sl     0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+ 6290 ?        Sl     0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+ 6353 ?        Ssl    0:00 /usr/lib/menu-cache/menu-cached /tmp/.menu-cached-:10-pi
+ 6368 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-trash --spawner :1.1 /org/gtk/gvfs/exec_spaw/0
+ 6634 ?        S      0:00 /usr/sbin/xrdp-sessvc 6640 6639
+ 6639 ?        Sl     0:00 /usr/bin/lxsession -s LXDE-pi -e LXDE
+ 6640 ?        S      0:46 Xvnc :11 -geometry 1920x1080 -depth 24 -rfbauth /home/pi/.vnc/sesman_pi_pas
+ 6646 ?        Sl     0:00 xrdp-chansrv
+ 6707 ?        Ss     0:00 /usr/bin/ssh-agent /usr/bin/dbus-launch --exit-with-session x-session-manag
+ 6710 ?        S      0:00 /usr/bin/dbus-launch --exit-with-session x-session-manager
+ 6711 ?        Ss     0:00 /usr/bin/dbus-daemon --fork --print-pid 10 --print-address 12 --session
+ 6717 ?        Sl     0:00 /usr/lib/gvfs/gvfsd
+ 6943 ?        S      0:02 openbox --config-file /home/pi/.config/openbox/lxde-pi-rc.xml
+ 6948 ?        Sl     0:00 lxpolkit
+ 6972 ?        Sl     0:14 lxpanel --profile LXDE-pi
+ 6976 ?        Sl     0:11 pcmanfm --desktop --profile LXDE-pi
+ 7039 ?        Ss     0:00 /usr/bin/ssh-agent -s
+ 7256 ?        Sl     0:00 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+ 7358 ?        Sl     0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+ 7388 ?        Sl     0:00 /usr/lib/gvfs/gvfs-goa-volume-monitor
+ 7429 ?        Sl     0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+ 7475 ?        Sl     0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+ 7551 ?        Ssl    0:00 /usr/lib/menu-cache/menu-cached /tmp/.menu-cached-:11-pi
+ 7628 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-trash --spawner :1.1 /org/gtk/gvfs/exec_spaw/0
+ 8010 ?        Sl     0:06 lxterminal
+ 8011 ?        S      0:00 gnome-pty-helper
+ 8012 pts/1    Ss     0:00 /bin/bash
+ 8394 ?        S      0:00 [kworker/0:1]
+ 9319 ?        Sl     1:03 epiphany-browser
+ 9325 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-http --spawner :1.1 /org/gtk/gvfs/exec_spaw/1
+ 9347 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-metadata
+10459 ?        S      0:00 [kworker/3:2]
+10724 ?        Sl     0:00 /usr/lib/dconf/dconf-service
+11421 ?        S      0:00 [kworker/2:1]
+12267 ?        S      0:00 [kworker/0:0]
+12770 ?        Sl     0:03 leafpad /home/pi/ELspring2016/misc/Assignment2/answers.txt
+13431 ?        S      0:00 [kworker/u8:0]
+14297 pts/1    R+     0:00 ps xa
+
+pi@raspberrypi:~$ date
+Tue  9 Feb 22:36:43 UTC 2016
+
+pi@raspberrypi:~$ who
+pi       tty1         2016-02-09 22:05
+pi       :0           2016-02-09 22:05 (:0)
+
+pi@raspberrypi:~$ whoami
+pi
+pi@raspberrypi:~$ which pytho
+no output
+pi@raspberrypi:~$ which nano
+/usr/bin/nano
+
+pi@raspberrypi:~$ ls /sbin
+acpi_available        fsck.ext2          isosize           modprobe          rtmon
+agetty                fsck.ext3          iwconfig          mountall          runlevel
+apm_available         fsck.ext4          iwevent           mount.cifs        runuser
+badblocks             fsck.ext4dev       iwgetid           mount.fuse        setcap
+blkdiscard            fsck.fat           iwlist            mount.lowntfs-3g  sfdisk
+blkid                 fsck.minix         iwpriv            mount.nfs         shadowconfig
+blockdev              fsck.msdos         iwspy             mount.nfs4        showmount
+bridge                fsck.nfs           kbdrate           mount.ntfs        shutdown
+capsh                 fsck.vfat          killall5          mount.ntfs-3g     slattach
+cfdisk                fsfreeze           ldconfig          nameif            sm-notify
+chcpu                 fstab-decode       ldconfig.real     ntfsclone         start-stop-daemon
+cryptsetup            fstrim             logsave           ntfscp            sulogin
+cryptsetup-reencrypt  getcap             losetup           ntfslabel         swaplabel
+ctrlaltdel            getpcaps           lsmod             ntfsresize        swapoff
+debugfs               getty              MAKEDEV           ntfsundelete      swapon
+depmod                halt               mii-tool          on_ac_power       switch_root
+dhclient              hdparm             mkdosfs           osd_login         sysctl
+dhclient-script       hwclock            mke2fs            pam_tally         tc
+dhcpcd                ifconfig           mkfs              pam_tally2        telinit
+dhcpcd5               ifdown             mkfs.bfs          parted            tune2fs
+dmsetup               ifquery            mkfs.cramfs       partprobe         udevadm
+dosfsck               ifup               mkfs.ext2         pivot_root        udevd
+dosfslabel            init               mkfs.ext3         plipconfig        umount.nfs
+dphys-swapfile        insmod             mkfs.ext4         plymouthd         umount.nfs4
+dumpe2fs              insserv            mkfs.ext4dev      poweroff          umount.udisks
+e2fsck                installkernel      mkfs.fat          rarp              umount.udisks2
+e2image               ip                 mkfs.minix        raw               unix_chkpwd
+e2label               ip6tables          mkfs.msdos        reboot            unix_update
+e2undo                ip6tables-restore  mkfs.ntfs         resize2fs         veritysetup
+fake-hwclock          ip6tables-save     mkfs.vfat         resolvconf        wipefs
+fatlabel              ipmaddr            mkhomedir_helper  rmmod             wpa_action
+fdisk                 iptables           mkntfs            route             wpa_cli
+findfs                iptables-restore   mkswap            rpcbind           wpa_supplicant
+fsck                  iptables-save      mntctl            rpc.statd         xtables-multi
+fsck.cramfs           iptunnel           modinfo           rtacct
+
+pi@raspberrypi:~$ lsmod
+Module                  Size  Used by
+ctr                     3717  2 
+ccm                     7811  2 
+arc4                    1753  2 
+rt2800usb              17802  0 
+rt2800lib              71907  1 rt2800usb
+rt2x00usb               8553  1 rt2800usb
+rt2x00lib              36744  3 rt2x00usb,rt2800lib,rt2800usb
+mac80211              542174  3 rt2x00lib,rt2x00usb,rt2800lib
+cfg80211              420690  2 mac80211,rt2x00lib
+crc_ccitt               1161  1 rt2800lib
+rfkill                 16659  2 cfg80211
+joydev                  9047  0 
+evdev                  10232  4 
+bcm2835_gpiomem         2995  0 
+uio_pdrv_genirq         2966  0 
+uio                     8235  1 uio_pdrv_genirq
+i2c_dev                 6047  0 
+snd_bcm2835            19769  9 
+snd_pcm                74825  1 snd_bcm2835
+snd_timer              18157  1 snd_pcm
+snd                    52116  21 snd_bcm2835,snd_timer,snd_pcm
+fuse                   81710  3 
+ipv6                  339514  35 
+
+pi@raspberrypi:~$ which mount
+/bin/mount
+pi@raspberrypi:~$ mount
+/dev/mmcblk0p7 on / type ext4 (rw,noatime,data=ordered)
+devtmpfs on /dev type devtmpfs (rw,relatime,size=469756k,nr_inodes=117439,mode=755)
+sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,relatime)
+proc on /proc type proc (rw,relatime)
+tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev)
+devpts on /dev/pts type devpts (rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000)
+tmpfs on /run type tmpfs (rw,nosuid,nodev,mode=755)
+tmpfs on /run/lock type tmpfs (rw,nosuid,nodev,noexec,relatime,size=5120k)
+tmpfs on /sys/fs/cgroup type tmpfs (ro,nosuid,nodev,noexec,mode=755)
+cgroup on /sys/fs/cgroup/systemd type cgroup (rw,nosuid,nodev,noexec,relatime,xattr,release_agent=/lib/systemd/systemd-cgroups-agent,name=systemd)
+cgroup on /sys/fs/cgroup/cpuset type cgroup (rw,nosuid,nodev,noexec,relatime,cpuset)
+cgroup on /sys/fs/cgroup/cpu,cpuacct type cgroup (rw,nosuid,nodev,noexec,relatime,cpu,cpuacct)
+cgroup on /sys/fs/cgroup/blkio type cgroup (rw,nosuid,nodev,noexec,relatime,blkio)
+cgroup on /sys/fs/cgroup/devices type cgroup (rw,nosuid,nodev,noexec,relatime,devices)
+cgroup on /sys/fs/cgroup/freezer type cgroup (rw,nosuid,nodev,noexec,relatime,freezer)
+cgroup on /sys/fs/cgroup/net_cls type cgroup (rw,nosuid,nodev,noexec,relatime,net_cls)
+systemd-1 on /proc/sys/fs/binfmt_misc type autofs (rw,relatime,fd=22,pgrp=1,timeout=300,minproto=5,maxproto=5,direct)
+mqueue on /dev/mqueue type mqueue (rw,relatime)
+debugfs on /sys/kernel/debug type debugfs (rw,relatime)
+fusectl on /sys/fs/fuse/connections type fusectl (rw,relatime)
+configfs on /sys/kernel/config type configfs (rw,relatime)
+/dev/mmcblk0p6 on /boot type vfat (rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,errors=remount-ro)
+tmpfs on /run/user/1000 type tmpfs (rw,nosuid,nodev,relatime,size=94812k,mode=700,uid=1000,gid=1000)
+gvfsd-fuse on /run/user/1000/gvfs type fuse.gvfsd-fuse (rw,nosuid,nodev,relatime,user_id=1000,group_id=1000)
+/dev/mmcblk0p5 on /media/pi/data type ext4 (rw,nosuid,nodev,relatime,data=ordered,uhelper=udisks2)
+/dev/mmcblk0p3 on /media/pi/SETTINGS type ext4 (rw,nosuid,nodev,relatime,data=ordered,uhelper=udisks2)
+
+pi@raspberrypi:~$ which sqlite
+no output
+pi@raspberrypi:~$ which sqlite3
+/usr/bin/sqlite3
+pi@raspberrypi:~$ sudo apt-get install sqlite3
+did this earlier
+pi@raspberrypi:~$ which sqlite3
+/usr/bin/sqlite3
+pi@raspberrypi:~$ dpkg -l installed_packages.txt >installed_packages.txt
+dpkg-query: no packages found matching installed_packages.txt
+
+pi@raspberrypi:~$ tail installed_packages.txt
+no output
+pi@raspberrypi:~$ wc -l installed_packages.txt 
+0 installed_packages.txt
+
+pi@raspberrypi:~$ find / -iname 'syslog*'
+terminal didn't respond
+pi@raspberrypi:~$ find / -iname 'syslog*' 2>/dev/null
+/run/systemd/journal/syslog
+/usr/lib/ruby/2.1.0/syslog
+/usr/lib/ruby/1.9.1/arm-linux-eabihf/syslog.so
+/usr/lib/pypy-upstream/lib_pypy/syslog.py
+/usr/lib/pypy-upstream/lib_pypy/syslog.pyc
+/usr/lib/arm-linux-gnueabihf/ruby/2.1.0/syslog.so
+/usr/lib/arm-linux-gnueabihf/perl/5.20.2/syslog.ph
+/usr/lib/arm-linux-gnueabihf/perl/5.20.2/auto/Sys/Syslog
+/usr/lib/arm-linux-gnueabihf/perl/5.20.2/auto/Sys/Syslog/Syslog.so
+/usr/lib/arm-linux-gnueabihf/perl/5.20.2/bits/syslog.ph
+/usr/lib/arm-linux-gnueabihf/perl/5.20.2/bits/syslog-ldbl.ph
+/usr/lib/arm-linux-gnueabihf/perl/5.20.2/bits/syslog-path.ph
+/usr/lib/arm-linux-gnueabihf/perl/5.20.2/sys/syslog.ph
+/usr/lib/arm-linux-gnueabihf/perl/5.20.2/Sys/Syslog.pm
+/usr/share/man/man2/syslog.2.gz
+/usr/share/man/man3/syslog.3.gz
+/usr/share/doc/libruby1.9.1/syslog
+/usr/share/doc/libruby1.9.1/syslog/syslog.txt
+/usr/share/ri/1.9.1/system/Syslog
+/usr/include/syslog.h
+/usr/include/arm-linux-gnueabihf/bits/syslog.h
+/usr/include/arm-linux-gnueabihf/bits/syslog-path.h
+/usr/include/arm-linux-gnueabihf/bits/syslog-ldbl.h
+/usr/include/arm-linux-gnueabihf/sys/syslog.h
+/lib/systemd/system/syslog.socket
+/var/log/syslog.1
+/var/log/syslog
+/var/lib/systemd/deb-systemd-helper-enabled/syslog.service
+/etc/systemd/system/syslog.service
+
+
