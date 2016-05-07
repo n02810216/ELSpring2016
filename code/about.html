@@ -1,0 +1,309 @@
+
+
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Temperature Data</title>
+	
+	<!-- JQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    	<!-- Bootstrap Core CSS -->
+    	<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Chart JS -->
+	 <script src="static/Chart.js-master/dist/Chart.bundle.js"></script>
+    	 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link href="/static/css/modern-business.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Temperature Data Graph</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="about.html">Home</a>
+                    </li>
+                   
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    <small></small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a>
+                    </li>
+                    <li class="active"></li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Intro Content -->
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+            </div>
+            <div class="col-md-6">
+                <h2>About Our Project</h2>
+                <p>The goal of this project was to create a Raspberry Pi driven device that could float on water and retrieve temperature (or PH, depending on sensor used) values at different depths, as well as demonstrating web hosting to serve the data in a readable format. Using entirely free software and inexpensive hardware, this configuration can be implemented anywhere for research or academic purposes. </p>
+                <p>This webpage is run by a python microframework called flask, based on Werkzueg and Jinja 2, as well as JQuery. The line graph is run by a open source Javascript and JQuery based plugin called Chart.js, available under the MIT license. The website is done with bootstrap framework. </p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, consequuntur, modi mollitia corporis ipsa voluptate corrupti um ratione ex ea praesentium quibusdam? Aut, in eum facere corrupti necessitatibus perspiciatis quis?</p>
+            </div>
+        </div>
+        <!-- /.row -->
+		<body>
+    <div style="width:100%;">
+        <canvas id="canvas"></canvas>
+    </div>
+    <br>
+    <br>
+    <script>
+	//JSON retrieval
+	//getJSON("http://127.0.0.1:5000", function(data){
+    //for (var i = 0, len = data.length; i < len; i++) {
+    //    console.log(data[i]);
+    //}
+	
+	//$.getJSON('http://raspiwlan0.duckdns.org/buoy/buoy.json', function(data) {
+		var test = '[["2016-04-06 15:06:16.802871", 0, 23.687, 74.6366], ["2016-04-06 15:06:31.560401", 1, 23.625, 74.4116], ["2016-04-06 15:06:46.293421", 2, 23.562, 74.4116], ["2016-04-06 15:12:02.634912", 0, 24.062, 75.3116], ["2016-04-06 15:12:17.326811", 1, 24.062, 75.425], ["2016-04-06 15:12:32.017500", 2, 24.062, 75.3116], ["2016-04-06 15:31:42.909736", 0, 22.937, 73.2866], ["2016-04-06 15:31:57.606344", 1, 23.437, 74.3], ["2016-04-06 15:32:12.309725", 2, 24.25, 75.7616]]'
+		var entryArr = test.split("]")
+		for(var i = 0;i < entryArr.length;i++){
+			entryArr[i] = entryArr[i].replace( '[','' );
+			entryArr[i] = entryArr[i].replace( '[','' );
+			entryArr[i] = entryArr[i].replace( /"/g,"" );
+
+			if(i != 0){
+				entryArr[i] = entryArr[i].replace( ' ','' );
+				entryArr[i] = entryArr[i].replace( /,/,'' );
+			}
+		}
+		var tempArr = new Array();
+		var dateArr = new Array();
+		var timeArr = new Array();
+		var depthArr = new Array();
+		var tempFArr = new Array();
+		var tempCArr = new Array();
+		for(var i = 0;i < entryArr.length;i++){
+			tempArr = entryArr[i].split(",");
+			for(var x = 0;x < 4;x++){
+				if(x==0){
+				dateArr.unshift(tempArr[x]);
+				}
+				if(x==1){
+				depthArr.unshift(tempArr[x]);
+				}
+				if(x==2){
+				tempCArr.unshift(tempArr[x]);
+				}
+				if(x==3){
+				tempFArr.unshift(tempArr[x]);
+				}
+			}
+		}
+		var D1Arr = new Array();
+		var D2Arr = new Array();
+		var D3Arr = new Array();
+		var labelArr = new Array();
+		for(var i = 0;i < tempFArr.length;i++){
+			if(depthArr[i] == 0){
+				D1Arr.unshift(tempFArr[i]);
+				labelArr.unshift(dateArr[i]);
+			}
+			if(depthArr[i] == 1){
+				D2Arr.unshift(tempFArr[i]);
+			}
+			if(depthArr[i] == 0){
+				D3Arr.unshift(tempFArr[i]);
+			}
+			labelArr.unshift()
+		}
+		//for(int i = 0;i <)
+		console.log(D1Arr);
+		console.log(timeArr);
+		console.log(tempFArr);
+		console.log(depthArr);
+	//console.log(tempData);
+	//End
+        var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var d = new Date();
+	var n = d.getFullYear();
+		
+        var randomScalingFactor = function() {
+            return Math.round(Math.random() * 100);
+            //return 0;
+        };
+        var randomColorFactor = function() {
+            return Math.round(Math.random() * 255);
+        };
+        var randomColor = function(opacity) {
+            return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
+        };
+
+        var config = {
+            type: 'line',
+            data: {
+                labels: labelArr,
+                datasets: [{
+                    label: 'Depth 1',
+                    data: D1Arr,
+                    fill: false,
+                    borderDash: [5, 5],
+                },{
+                    label: "Depth 2",
+                    data: D2Arr,
+			fill: false,
+                },
+				{
+                    label: "Depth 3",
+                    data: D3Arr,
+			fill: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                title:{
+                    display:true,
+                    text:'Temperature data for ' + n
+                },
+                tooltips: {
+                    mode: 'label',
+                    callbacks: {
+                        // beforeTitle: function() {
+                        //     return '...beforeTitle';
+                        // },
+                        // afterTitle: function() {
+                        //     return '...afterTitle';
+                        // },
+                        // beforeBody: function() {
+                        //     return '...beforeBody';
+                        // },
+                        // afterBody: function() {
+                        //     return '...afterBody';
+                        // },
+                        // beforeFooter: function() {
+                        //     return '...beforeFooter';
+                        // },
+                        // footer: function() {
+                        //     return 'Footer';
+                        // },
+                        // afterFooter: function() {
+                        //     return '...afterFooter';
+                        // },
+                    }
+                },
+                hover: {
+                    mode: 'dataset'
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            show: true,
+                            labelString: 'Month'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            show: true,
+                            labelString: 'Value'
+                        },
+                        ticks: {
+                            suggestedMin: -10,
+                            suggestedMax: 120,
+                        }
+                    }]
+                }
+            }
+        };
+
+
+        $.each(config.data.datasets, function(i, dataset) {
+            dataset.borderColor = randomColor(0.4);
+            dataset.backgroundColor = randomColor(0.5);
+            dataset.pointBorderColor = randomColor(0.7);
+            dataset.pointBackgroundColor = randomColor(0.5);
+            dataset.pointBorderWidth = 1;
+        });
+
+            var ctx = document.getElementById("canvas").getContext("2d");
+            window.myLine = new Chart(ctx, config);
+	//});
+    </script>
+</body>
+           
+        <!-- /.row -->
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright Anthony Giordano and Phelipe</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <!-- <script src="static/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="static/js/bootstrap.min.js"></script>
+
+
+
+
+</div>
+
+
+            <div id="push"></div>
+        
